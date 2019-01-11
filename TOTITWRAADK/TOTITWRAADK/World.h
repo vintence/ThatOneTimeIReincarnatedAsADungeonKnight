@@ -14,11 +14,15 @@ public:
 	void Draw(sf::RenderWindow &window);
 
 private:
-	sf::Sprite weapon;
-	sf::Sprite consumer;
-	sf::Sprite house;
-	sf::Sprite road;
-	sf::Sprite entertain;
+	//sf::Sprite weapon;
+	//sf::Sprite consumer;
+	//sf::Sprite house;
+	//sf::Sprite road;
+	//sf::Sprite entertain;
+	sf::Sprite dirt;
+	sf::Sprite grass;
+	sf::Sprite lava;
+	sf::Sprite water;
 	sf::Sprite empty;
 
 	sf::Vector2f tileScale;

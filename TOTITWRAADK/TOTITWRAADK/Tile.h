@@ -5,11 +5,10 @@
 
 enum TileType
 {
-	House,
-	Consumer,
-	Weapon,
-	Road,
-	Entertain,
+	Grass,
+	Water,
+	Dirt,
+	Lava,
 	Empty
 };
 
@@ -24,24 +23,10 @@ public:
 	const sf::Vector2f &GetPosition();
 	const TileType &GetType();
 
-	const float &GetGenerateMoney();
-	const float &GetGenerateWeapon();
-	const float &GetPopulationCost();
-	const float &GetGeneratePopulation();
-	const float &GetMoneyCost();
-	const float &GetGenerateHappiness();
-
 private:
 	sf::Sprite mySprite;
 	sf::Vector2f myPosition;
 	TileType myType;
-
-	float generateMoney;
-	float generateWeapon;
-	float populationCost;
-	float generatePopulation;
-	float moneyCost;
-	float generateHappiness;
 };
 
 #endif
