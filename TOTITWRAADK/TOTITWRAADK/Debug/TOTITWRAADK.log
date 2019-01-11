@@ -1,0 +1,54 @@
+﻿  pch.cpp
+  App.cpp
+  Enemy.cpp
+  Events.cpp
+  Grunt.cpp
+c:\users\jakob.johnsson\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\grunt.cpp(17): error C2064: term does not evaluate to a function taking 1 arguments
+c:\users\jakob.johnsson\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\grunt.cpp(19): error C2144: syntax error: 'void' should be preceded by ';'
+c:\users\jakob.johnsson\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\grunt.cpp(20): error C2601: 'Grunt::move': local function definitions are illegal
+  c:\users\jakob.johnsson\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\grunt.cpp(7): note: this line contains a '{' which has not yet been matched
+c:\users\jakob.johnsson\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\grunt.cpp(7): fatal error C1075: '{': no matching token found
+  InputManager.cpp
+c:\users\jakob.johnsson\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\inputmanager.cpp(12): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+c:\users\jakob.johnsson\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\inputmanager.cpp(12): warning C4244: 'argument': conversion from 'const T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+c:\users\jakob.johnsson\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\inputmanager.cpp(23): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+c:\users\jakob.johnsson\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\inputmanager.cpp(23): warning C4244: 'argument': conversion from 'const T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+  ResourceManager.cpp
+  Tile.cpp
+  TOTITWRAADK.cpp
+  Generating Code...
+c:\users\jakob.johnsson\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\resourcemanager.cpp(32): warning C4172: returning address of local variable or temporary: tempSprite
+c:\users\jakob.johnsson\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\inputmanager.cpp(29): warning C4715: 'InputManager::isSpriteCollided': not all control paths return a value
+c:\users\jakob.johnsson\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\inputmanager.cpp(20): warning C4715: 'InputManager::isSpriteClicked': not all control paths return a value
