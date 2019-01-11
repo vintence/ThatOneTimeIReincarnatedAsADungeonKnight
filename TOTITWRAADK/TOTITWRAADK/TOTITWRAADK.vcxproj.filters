@@ -16,8 +16,11 @@
     <Filter Include="Engines">
       <UniqueIdentifier>{698156e8-03c7-44be-bfa8-48cb594d6329}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Tiles">
+    <Filter Include="World">
       <UniqueIdentifier>{84df974f-49f2-4185-8a03-7052ff999525}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{b1ded466-950b-449f-b8bb-fd48a207cfd6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -31,10 +34,19 @@
       <Filter>Engines</Filter>
     </ClInclude>
     <ClInclude Include="Tile.h">
-      <Filter>Tiles</Filter>
+      <Filter>World</Filter>
     </ClInclude>
     <ClInclude Include="Events.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
+      <Filter>World</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -51,10 +63,19 @@
       <Filter>Engines</Filter>
     </ClCompile>
     <ClCompile Include="Tile.cpp">
-      <Filter>Tiles</Filter>
+      <Filter>World</Filter>
     </ClCompile>
     <ClCompile Include="Events.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="World.cpp">
+      <Filter>World</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Entities</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

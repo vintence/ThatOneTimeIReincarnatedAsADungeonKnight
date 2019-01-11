@@ -1,0 +1,6 @@
+﻿  TOTITWRAADK.cpp
+c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\totitwraadk.cpp(45): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+  World.cpp
+c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\world.cpp(105): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+  TOTITWRAADK.vcxproj -> C:\Users\trungkin.le\Documents\Visual Studio 2017\Projects\ThatOneTimeIReincarnatedAsADungeonKnight\TOTITWRAADK\Debug\TOTITWRAADK.exe
