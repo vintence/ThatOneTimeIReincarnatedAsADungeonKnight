@@ -9,9 +9,12 @@ std::map<std::string, sf::Texture> ResourceManager::_textures;
 std::map<std::string, sf::Font> ResourceManager::_fonts;
 void ResourceManager::Init()
 {
-	/*LoadTexture("cursor", "Resources/kien.png");
-	LoadFont("textFont", "Resources/PERI.ttf");*/
+	//load in stuff
+	LoadTexture("player", "Resources/player.png");
+	LoadTexture("resourceSheet", "Resources/TileSheet.png");
 
+
+	//LoadFont("textFont", "Resources/PERI.ttf");
 }
 
 void ResourceManager::LoadTexture(std::string textureName, std::string fileName)
