@@ -11,7 +11,7 @@ void ResourceManager::Init()
 {
 	//load in stuff
 	LoadTexture("player", "Resources/player.png");
-	LoadTexture("resourceSheet", "Resources/spritetest.png");
+	LoadTexture("resourceSheet", "Resources/sprites.png");
 
 
 	//LoadFont("textFont", "Resources/PERI.ttf");
