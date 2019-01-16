@@ -11,6 +11,7 @@ public:
 
 	void Draw(sf::RenderWindow &window);
 	void Update(sf::RenderWindow &window);
+	void LookAtMouse(sf::RenderWindow &window);
 	sf::Vector2f GetPosition();
 
 private:
