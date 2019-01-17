@@ -1,9 +1,9 @@
 ﻿  Player.cpp
 c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\player.cpp(15): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\player.cpp(119): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\player.cpp(123): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\player.cpp(132): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\player.cpp(139): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\player.cpp(109): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\player.cpp(113): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\player.cpp(122): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\player.cpp(129): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   TOTITWRAADK.cpp
 c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\totitwraadk.cpp(45): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
   Generating Code...

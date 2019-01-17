@@ -14,7 +14,7 @@ Player::Player()
 	playerScale = sf::Vector2f(4.0f, 4.0f);
 	player.setOrigin(player.getTextureRect().width / 2, player.getTextureRect().height / 2);
 	player.setScale(playerScale); //to flip put - infront scalenumber  player.setScale(-4.0f, 4.0f);
-	player.setPosition(0, 0);
+	player.setPosition(300, 300);
 
 	std::ifstream config("Resources/config.cfg");
 	float number;
@@ -44,7 +44,8 @@ void Player::Draw(sf::RenderWindow & window)
 
 void Player::Update(sf::RenderWindow & window)
 {
-	
+	std::cout << clock.getElapsedTime().asSeconds() << std::endl;
+
 	//movementspeed scaling
 	movementSpeed = baseSpeed + (agility / 5);
 
@@ -52,17 +53,7 @@ void Player::Update(sf::RenderWindow & window)
 	//draw
 	Draw(window);
 
-	//flip player on mouse position
-	//if (InputManager::getMousePosition(window).x < window.getSize().x / 2)
-	//{
-	//	player.setScale(-playerScale.x, playerScale.y);
-	//}
-	//else
-	//{
-	//	player.setScale(playerScale);
-	//}
-
-	//
+	//basic WASD movement
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
 		player.setPosition(GetPosition().x, GetPosition().y - movementSpeed); //can also use player.move('x', 'y');
@@ -106,7 +97,7 @@ sf::Vector2f Player::GetPosition()
 
 void Player::LookAtMouse(sf::RenderWindow &window) 
 {
-	//hämta width och height från config fil. vi behöver windows storlek för att göra rotate to mouse
+	//hämta width och height från config fil. vi behöver windows storlek för att göra rotate to mouse eftersom player är i mitten och vi behöver windows mitt för att vara en bas man roterar runt om
 	std::ifstream config("Resources/config.cfg");
 	float number;
 	std::string name;
