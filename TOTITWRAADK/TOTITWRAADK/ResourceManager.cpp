@@ -48,4 +48,5 @@ sf::Font &ResourceManager::GetFont(std::string name)
 
 ResourceManager::~ResourceManager()
 {
+
 }

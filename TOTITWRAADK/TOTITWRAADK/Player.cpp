@@ -5,6 +5,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <math.h>
+#include <fstream>
 
 Player::Player()
 {
@@ -42,22 +44,23 @@ void Player::Draw(sf::RenderWindow & window)
 
 void Player::Update(sf::RenderWindow & window)
 {
-
+	
 	//movementspeed scaling
 	movementSpeed = baseSpeed + (agility / 5);
 
+	LookAtMouse(window);
 	//draw
 	Draw(window);
 
 	//flip player on mouse position
-	if (InputManager::getMousePosition(window).x < window.getSize().x / 2)
-	{
-		player.setScale(-playerScale.x, playerScale.y);
-	}
-	else
-	{
-		player.setScale(playerScale);
-	}
+	//if (InputManager::getMousePosition(window).x < window.getSize().x / 2)
+	//{
+	//	player.setScale(-playerScale.x, playerScale.y);
+	//}
+	//else
+	//{
+	//	player.setScale(playerScale);
+	//}
 
 	//
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
@@ -99,4 +102,45 @@ void Player::Update(sf::RenderWindow & window)
 sf::Vector2f Player::GetPosition()
 {
 	return sf::Vector2f(player.getPosition());
+}
+
+void Player::LookAtMouse(sf::RenderWindow &window) 
+{
+	//hämta width och height från config fil. vi behöver windows storlek för att göra rotate to mouse
+	std::ifstream config("Resources/config.cfg");
+	float number;
+	std::string name;
+	int windowWidth;
+	int windowHeight;
+	while (config >> name >> number)
+	{
+		if (name == "windowWidth:")
+		{
+			windowWidth = number;
+		}
+		if (name == "windowHeight:")
+		{
+			windowHeight = number;
+		}
+	}
+
+	sf::Vector2i mousepos = InputManager::getMousePosition(window);
+
+	// now we have both the sprite position and the cursor
+	// position lets do the calculation so our sprite will
+	// face the position of the mouse
+	const float PI = 3.14159265;
+
+	//make cursor pos start 0,0 in middle of screen
+	mousepos.x = mousepos.x - windowWidth/2;
+	mousepos.y = mousepos.y - windowHeight/2;
+
+	//atan = arctan https://www.mathopenref.com/arctan.html <kollar matte
+	float rotation = atan2(mousepos.y, mousepos.x) * (180 / PI);
+	rotation = rotation + 90;
+
+	//std::cout << "mouseposX:" << mousepos.x << " mouseposY:" << mousepos.y << "playerposX:" << player.getPosition().x << "playerposY:" << player.getPosition().y << std::endl;
+	//std::cout << "rotation:" << rotation << std::endl;
+
+	player.setRotation(rotation);
 }
