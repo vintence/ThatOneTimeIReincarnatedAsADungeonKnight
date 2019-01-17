@@ -14,6 +14,8 @@ public:
 	void LookAtMouse(sf::RenderWindow &window);
 	sf::Vector2f GetPosition();
 
+	sf::Clock clock;
+
 private:
 	sf::Sprite player;
 	sf::Vector2f playerScale;
