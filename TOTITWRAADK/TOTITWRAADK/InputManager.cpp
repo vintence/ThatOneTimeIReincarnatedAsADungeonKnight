@@ -18,11 +18,19 @@ bool InputManager::isSpriteClicked(const sf::Sprite &sprite, sf::Mouse::Button m
 		}
 	}
 }
-bool InputManager::isSpriteCollided(const sf::Sprite &sprite, sf::Mouse::Button mouseButton, sf::RenderWindow &window)
+bool InputManager::isSpriteCollided(const sf::Sprite &sprite, sf::RenderWindow &window)
 {
 	sf::IntRect spriteRect(sprite.getPosition().x, sprite.getPosition().y, sprite.getTextureRect().width*sprite.getScale().x, sprite.getTextureRect().height*sprite.getScale().y); //hämta spritens storlek
 
 	if (spriteRect.contains((sf::Vector2i)getMousePosition(window))) //om musen är inom spritens storlek return true
+	{
+		return true;
+	}
+}
+bool InputManager::isSpriteCollidedWithPosition(const sf::Sprite & sprite1, sf::Vector2f aPosition)
+{
+	sf::IntRect sprite1Rect(sprite1.getPosition().x, sprite1.getPosition().y, sprite1.getTextureRect().width*sprite1.getScale().x, sprite1.getTextureRect().height*sprite1.getScale().y);
+	if (sprite1Rect.contains(sf::Vector2i(aPosition)))
 	{
 		return true;
 	}
