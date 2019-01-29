@@ -5,15 +5,22 @@
 #include "Tile.h"
 #include <vector>
 
+class Player;
+
 class World
 {
 public:
-	World();
+	//World();
+	World(Player &aPlayer);
 	~World();
 	void Update(sf::RenderWindow &window);
 	void Draw(sf::RenderWindow &window);
+	sf::IntRect GetRect(sf::Sprite aSprite);
+
+	//void SetPlayer(Player &aPlayer);
 
 private:
+	Player &player;
 	//sf::Sprite weapon;
 	//sf::Sprite consumer;
 	//sf::Sprite house;
@@ -28,6 +35,9 @@ private:
 	sf::Vector2f tileScale;
 
 	std::vector<Tile> myTiles;
+	std::vector<Tile> conCreteTiles;
+
+
 };
 
 #endif

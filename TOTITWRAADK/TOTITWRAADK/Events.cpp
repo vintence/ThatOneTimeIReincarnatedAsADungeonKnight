@@ -250,13 +250,13 @@ void Events::Popup(sf::RenderWindow &window)
 	}
 
 	//small graphic for hovering over a button
-	if (InputManager::isSpriteCollided(button1, sf::Mouse::Button::Right, window))
+	if (InputManager::isSpriteCollided(button1, window))
 	{
 		button1Frame = 30;
 		//std::cout << InputManager::getMousePosition(window).x << ", " << InputManager::getMousePosition(window).y <<std::endl ;
 	}
 	else button1Frame = 0;
-	if (InputManager::isSpriteCollided(button2, sf::Mouse::Button::Right, window))
+	if (InputManager::isSpriteCollided(button2, window))
 	{
 		button2Frame = 30;
 		//std::cout << InputManager::getMousePosition(window).x << ", " << InputManager::getMousePosition(window).y << std::endl;

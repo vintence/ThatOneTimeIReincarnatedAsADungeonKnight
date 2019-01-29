@@ -10,7 +10,8 @@ public:
 
 	static void Init();
 	static bool isSpriteClicked(const sf::Sprite &sprite, sf::Mouse::Button mouseButton, sf::RenderWindow &window);
-	static bool isSpriteCollided(const sf::Sprite &sprite, sf::Mouse::Button mouseButton, sf::RenderWindow &window);
+	static bool isSpriteCollided(const sf::Sprite &sprite, sf::RenderWindow &window);
+	static bool isSpriteCollidedWithPosition(const sf::Sprite &sprite1, sf::Vector2f aPosition);
 	static bool isMouseInsideWindow(sf::RenderWindow &window);
 	static sf::Vector2i getMousePosition(sf::RenderWindow &window);
 
