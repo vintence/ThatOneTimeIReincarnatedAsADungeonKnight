@@ -13,6 +13,8 @@ Tile::Tile(const sf::Sprite &sprite, const sf::Vector2f &position, const TileTyp
 	mySprite.setPosition(position);
 	myPosition = position;
 	myType = type;
+	tileBoundingBox.Copy(mySprite.getGlobalBounds());	//myPosition.x, myPosition.y, myPosition.x + mySprite.getTextureRect().width * mySprite.getScale().x, myPosition.y + mySprite.getTextureRect().height * mySprite.getScale().y);
+	myRect = mySprite.getGlobalBounds();
 
 	switch (type)
 	{
@@ -105,4 +107,18 @@ const sf::Vector2f & Tile::GetPosition()
 const TileType & Tile::GetType()
 {
 	return myType;
+}
+
+sf::FloatRect Tile::GetRect()
+{
+	return myRect; //sf::IntRect(myPosition.x, myPosition.y, mySprite.getTextureRect().width, mySprite.getTextureRect().height);
+}
+sf::FloatRect Tile::GetRectWithPosition()
+{
+	return sf::FloatRect(myPosition.x, myPosition.y, myPosition.x + (mySprite.getTextureRect().width * mySprite.getScale().x), myPosition.y + (mySprite.getTextureRect().height * mySprite.getScale().y));
+}
+
+BoundingBox & Tile::GetBoungingBox()
+{
+	return tileBoundingBox;
 }

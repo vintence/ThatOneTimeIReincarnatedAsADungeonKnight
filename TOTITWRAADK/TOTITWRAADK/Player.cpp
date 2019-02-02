@@ -10,7 +10,6 @@
 
 Player::Player()
 {
-
 	player = ResourceManager::MakeSprite("player", frame, 0, 32, 32);
 	playerScale = sf::Vector2f(2.0f, 2.0f);
 	player.setOrigin(player.getTextureRect().width / 2, player.getTextureRect().height / 2); //set var mitten är för rotation
@@ -34,6 +33,12 @@ Player::Player()
 			intelligent = number;
 		}
 	}
+
+	/*playerCurrentRect = player.getGlobalBounds();
+	playerOldRect = playerCurrentRect;*/
+
+	myCurrentBox.Copy(player.getGlobalBounds());		//player.getPosition().x - ((player.getTextureRect().width * playerScale.x) / 2), player.getPosition().y - ((player.getTextureRect().height * playerScale.y) / 2), (player.getPosition().x - ((player.getTextureRect().width * playerScale.x) / 2)) + player.getTextureRect().width * playerScale.x, (player.getPosition().y - ((player.getTextureRect().height * playerScale.y) / 2)) + player.getTextureRect().height * playerScale.y);
+	myOldBox.Copy(myCurrentBox);
 }
 
 //Player::Player(Player & aPlayer)
@@ -44,19 +49,33 @@ Player::Player()
 
 Player::~Player()
 {
+
 }
 
 void Player::Draw(sf::RenderWindow & window)
 {
+	window.draw(collidebox);
 	window.draw(player);
 	window.draw(attack);
 }
 
-void Player::Update(sf::RenderWindow & window)
+void Player::Update(sf::RenderWindow & window, const float &someDeltaTime)
 {
+	collidebox = sf::RectangleShape(sf::Vector2f(player.getTextureRect().width * player.getScale().x, player.getTextureRect().height * player.getScale().y));
+	collidebox.setPosition(player.getPosition());
+	collidebox.setOrigin(collidebox.getGlobalBounds().width/2, collidebox.getGlobalBounds().height/2);
+
+
+
+	//myOldBox.Copy(myCurrentBox);
+	//myCurrentBox.Init(player.getPosition().x - ((player.getTextureRect().width * playerScale.x) / 2), player.getPosition().y - ((player.getTextureRect().height * playerScale.y) / 2), (player.getPosition().x - ((player.getTextureRect().width * playerScale.x) / 2)) + player.getTextureRect().width * playerScale.x, (player.getPosition().y - ((player.getTextureRect().height * playerScale.y) / 2)) + player.getTextureRect().height * playerScale.y);
+
+	
+
+
 	//std::cout << "\n" <<player.getPosition().x << " y:" << player.getPosition().y; //cout player position
 	//movementspeed scaling
-	movementSpeed = baseSpeed + (agility / 5);
+	movementSpeed = (baseSpeed + (agility / 5)) * someDeltaTime;
 
 	LookAtMouse(window);
 	//draw
@@ -92,6 +111,12 @@ void Player::Update(sf::RenderWindow & window)
 		}
 	}
 
+	/*playerOldRect = playerCurrentRect;
+	playerCurrentRect = player.getGlobalBounds();*/
+
+	myOldBox.Copy(myCurrentBox);
+	myCurrentBox.Copy(player.getGlobalBounds());
+
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
 	{
@@ -103,13 +128,17 @@ void Player::Update(sf::RenderWindow & window)
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
 	{
-		agility++;
+		agility += 1;
 		std::cout << "agility: " << agility << std::endl;
 		std::cout << "speed: " << movementSpeed << std::endl;
 	}
-	if (agility < 0)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 	{
-		agility = 0;
+		window.close();
+	}
+	if (agility < 10)
+	{
+		agility = 10;
 	}
 }
 
@@ -122,10 +151,112 @@ void Player::SetPosition(sf::Vector2f aPosition)
 	player.setPosition(aPosition);
 }
 
-sf::IntRect Player::GetRect()
+sf::FloatRect Player::GetRect()
 { //läggas till saker efter getposition för att origin är i mitten av spriten.
-	return sf::IntRect(player.getPosition().x - ((player.getTextureRect().width * playerScale.x)/2), player.getPosition().y - ((player.getTextureRect().height * playerScale.y) / 2), player.getTextureRect().width * playerScale.x, player.getTextureRect().height * playerScale.y);
+	return player.getGlobalBounds(); //sf::FloatRect(player.getPosition().x - ((player.getTextureRect().width * playerScale.x)/2), player.getPosition().y - ((player.getTextureRect().height * playerScale.y) / 2), player.getTextureRect().width * playerScale.x, player.getTextureRect().height * playerScale.y);
 }
+
+sf::FloatRect Player::GetRectWithPosition()
+{
+	return sf::FloatRect(player.getPosition().x - ((player.getTextureRect().width * playerScale.x) / 2), player.getPosition().y - ((player.getTextureRect().height * playerScale.y) / 2), (player.getPosition().x - ((player.getTextureRect().width * playerScale.x) / 2)) + player.getTextureRect().width * playerScale.x, (player.getPosition().y - ((player.getTextureRect().height * playerScale.y) / 2)) + player.getTextureRect().height * playerScale.y);
+}
+
+
+const bool & Player::GetLeftCollision(BoundingBox & aColisionBox)
+{
+	return myOldBox.GetRight() < aColisionBox.GetLeft() && myCurrentBox.GetRight() >= aColisionBox.GetLeft();
+}
+
+const bool & Player::GetRightCollision(BoundingBox & aColisionBox)
+{
+	return myOldBox.GetLeft() >= aColisionBox.GetRight() && myCurrentBox.GetLeft() < aColisionBox.GetRight();
+}
+
+const bool & Player::GetUpCollision(BoundingBox & aColisionBox)
+{
+	return myOldBox.GetBottom() < aColisionBox.GetTop() && myCurrentBox.GetBottom() >= aColisionBox.GetTop();
+}
+
+const bool & Player::GetDownCollision(BoundingBox & aColisionBox)
+{
+	return myOldBox.GetTop() >= aColisionBox.GetBottom() && myCurrentBox.GetTop() < aColisionBox.GetBottom();
+}
+
+const sf::FloatRect & Player::GetLastTileCollidedLeft()
+{
+	return myLastTileColliderLeft;
+}
+const sf::FloatRect & Player::GetLastTileCollidedRight()
+{
+	return myLastTileColliderRight;
+}
+const sf::FloatRect & Player::GetLastTileCollidedUp()
+{
+	return myLastTileColliderUp;
+}
+const sf::FloatRect & Player::GetLastTileCollidedDown()
+{
+	return myLastTileColliderDown;
+}
+
+const void Player::SetTileCollidedLeft(const sf::FloatRect & aCollider)
+{
+	myLastTileColliderLeft = aCollider;
+}
+const void Player::SetTileCollidedRight(const sf::FloatRect & aCollider)
+{
+	myLastTileColliderRight = aCollider;
+}
+const void Player::SetTileCollidedUp(const sf::FloatRect & aCollider)
+{
+	myLastTileColliderUp = aCollider;
+}
+const void Player::SetTileCollidedDown(const sf::FloatRect & aCollider)
+{
+	myLastTileColliderDown = aCollider;
+}
+
+
+const bool & Player::GetLeftCollision(sf::FloatRect aRectWithPosition)
+{
+	if (playerOldRect.width < aRectWithPosition.left && playerCurrentRect.width >= aRectWithPosition.left)
+	{
+		std::cout << "\nplayer old rect .x + storlek:" << playerOldRect.width;
+		std::cout << "\ntile.left: " << aRectWithPosition.left;
+		return true;
+	}
+	return false;
+}
+
+const bool & Player::GetRightCollision(sf::FloatRect aRectWithPosition)
+{
+	if (playerOldRect.left >= aRectWithPosition.width && playerCurrentRect.left < aRectWithPosition.width)
+	{
+		return true;
+	}
+	return false;
+}
+
+const bool & Player::GetUpCollision(sf::FloatRect aRectWithPosition)
+{
+	if (playerOldRect.height < aRectWithPosition.top && playerCurrentRect.height >= aRectWithPosition.top)
+	{
+		return true;
+	}
+	return false;
+}
+
+const bool & Player::GetDownCollision(sf::FloatRect aRectWithPosition)
+{
+	if (playerOldRect.top >= aRectWithPosition.height && playerCurrentRect.top < aRectWithPosition.height)
+	{
+		return true;
+	}
+	return false;
+}
+
+
+
 
 void Player::LookAtMouse(sf::RenderWindow &window) 
 {
@@ -165,4 +296,5 @@ void Player::LookAtMouse(sf::RenderWindow &window)
 	//std::cout << "rotation:" << rotation << std::endl;
 
 	player.setRotation(rotation);
+	collidebox.setRotation(rotation);
 }

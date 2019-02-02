@@ -1,23 +1,20 @@
-﻿  World.cpp
-c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\world.cpp(396): warning C4018: '<': signed/unsigned mismatch
-c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\world.cpp(411): warning C4018: '<': signed/unsigned mismatch
-c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\world.cpp(430): warning C4018: '<': signed/unsigned mismatch
-c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\world.cpp(488): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-          and
-          [
-              T=int
-          ]
-c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\world.cpp(488): warning C4244: 'argument': conversion from 'const T' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-          and
-          [
-              T=int
-          ]
+﻿  Player.cpp
+c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\player.cpp(15): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\player.cpp(20): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\player.cpp(273): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\player.cpp(277): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\player.cpp(283): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\player.cpp(291): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\player.cpp(167): warning C4172: returning address of local variable or temporary
+c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\player.cpp(172): warning C4172: returning address of local variable or temporary
+c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\player.cpp(177): warning C4172: returning address of local variable or temporary
+c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\player.cpp(182): warning C4172: returning address of local variable or temporary
+c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\player.cpp(235): warning C4172: returning address of local variable or temporary
+c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\player.cpp(237): warning C4172: returning address of local variable or temporary
+c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\player.cpp(253): warning C4172: returning address of local variable or temporary
+c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\player.cpp(255): warning C4172: returning address of local variable or temporary
+c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\player.cpp(226): warning C4172: returning address of local variable or temporary
+c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\player.cpp(244): warning C4172: returning address of local variable or temporary
+c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\player.cpp(228): warning C4172: returning address of local variable or temporary
+c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\player.cpp(246): warning C4172: returning address of local variable or temporary
   TOTITWRAADK.vcxproj -> C:\Users\trungkin.le\Documents\Visual Studio 2017\Projects\ThatOneTimeIReincarnatedAsADungeonKnight\TOTITWRAADK\Debug\TOTITWRAADK.exe

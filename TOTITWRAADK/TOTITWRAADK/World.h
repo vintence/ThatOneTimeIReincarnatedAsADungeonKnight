@@ -15,7 +15,8 @@ public:
 	~World();
 	void Update(sf::RenderWindow &window);
 	void Draw(sf::RenderWindow &window);
-	sf::IntRect GetRect(sf::Sprite aSprite);
+	//sf::IntRect GetRect(sf::Sprite aSprite);
+	//sf::IntRect GetRectWithPosition(sf::Sprite aSprite);
 
 	//void SetPlayer(Player &aPlayer);
 
