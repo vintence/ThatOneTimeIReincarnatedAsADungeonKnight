@@ -7,14 +7,16 @@
 #include <string>
 #include <math.h>
 #include <fstream>
+#include "World.h"
 
-Player::Player()
+Player::Player(World &aWorld)
+	:world(aWorld)
 {
 	player = ResourceManager::MakeSprite("player", frame, 0, 32, 32);
 	playerScale = sf::Vector2f(2.0f, 2.0f);
 	player.setOrigin(player.getTextureRect().width / 2, player.getTextureRect().height / 2); //set var mitten är för rotation
 	player.setScale(playerScale); //to flip put - infront scalenumber  player.setScale(-4.0f, 4.0f);
-	player.setPosition(0, 0);
+	player.setPosition(100, 100);
 
 	attack = ResourceManager::MakeSprite("bullet", 0, 0, 10, 10);
 	attack.setOrigin(attack.getTextureRect().width / 2, attack.getTextureRect().height / 2);
@@ -33,18 +35,7 @@ Player::Player()
 			intelligent = number;
 		}
 	}
-
-	/*playerCurrentRect = player.getGlobalBounds();
-	playerOldRect = playerCurrentRect;*/
-
-	myCurrentBox.Copy(player.getGlobalBounds());		//player.getPosition().x - ((player.getTextureRect().width * playerScale.x) / 2), player.getPosition().y - ((player.getTextureRect().height * playerScale.y) / 2), (player.getPosition().x - ((player.getTextureRect().width * playerScale.x) / 2)) + player.getTextureRect().width * playerScale.x, (player.getPosition().y - ((player.getTextureRect().height * playerScale.y) / 2)) + player.getTextureRect().height * playerScale.y);
-	myOldBox.Copy(myCurrentBox);
 }
-
-//Player::Player(Player & aPlayer)
-//{
-//	*this = aPlayer;
-//}
 
 
 Player::~Player()
@@ -63,59 +54,69 @@ void Player::Update(sf::RenderWindow & window, const float &someDeltaTime)
 {
 	collidebox = sf::RectangleShape(sf::Vector2f(player.getTextureRect().width * player.getScale().x, player.getTextureRect().height * player.getScale().y));
 	collidebox.setPosition(player.getPosition());
-	collidebox.setOrigin(collidebox.getGlobalBounds().width/2, collidebox.getGlobalBounds().height/2);
+	collidebox.setOrigin(collidebox.getGlobalBounds().width / 2, collidebox.getGlobalBounds().height / 2);
 
-
-
-	//myOldBox.Copy(myCurrentBox);
-	//myCurrentBox.Init(player.getPosition().x - ((player.getTextureRect().width * playerScale.x) / 2), player.getPosition().y - ((player.getTextureRect().height * playerScale.y) / 2), (player.getPosition().x - ((player.getTextureRect().width * playerScale.x) / 2)) + player.getTextureRect().width * playerScale.x, (player.getPosition().y - ((player.getTextureRect().height * playerScale.y) / 2)) + player.getTextureRect().height * playerScale.y);
-
-	
-
-
-	//std::cout << "\n" <<player.getPosition().x << " y:" << player.getPosition().y; //cout player position
 	//movementspeed scaling
 	movementSpeed = (baseSpeed + (agility / 5)) * someDeltaTime;
 
-	LookAtMouse(window);
+	//LookAtMouse(window);
+
 	//draw
 	Draw(window);
 
+	topLeftTileId = ((int)player.getGlobalBounds().left / 32) + (((int)player.getGlobalBounds().top / 32) * 100);
+	topRightTileId = (((int)player.getGlobalBounds().left + player.getGlobalBounds().width) / 32) + (((int)player.getGlobalBounds().top / 32) * 100);
+	botLeftTileId = ((int)player.getGlobalBounds().left / 32) + ((((int)player.getGlobalBounds().top + player.getGlobalBounds().height) / 32) * 100);
+	botRightTileId = (((int)player.getGlobalBounds().left + player.getGlobalBounds().width) / 32) + ((((int)player.getGlobalBounds().top + player.getGlobalBounds().height) / 32) * 100);
+
+	topTileId = (int)(((int)player.getGlobalBounds().left + ((int)player.getGlobalBounds().width / 2)) / 128) + (((int)player.getGlobalBounds().top / 128) * 100);
+	leftTileId = (int)((int)player.getGlobalBounds().left / 128) + ((((int)player.getGlobalBounds().top + ((int)player.getGlobalBounds().height / 2)) / 128) * 100);
+	botTileId = (int)(((int)player.getGlobalBounds().left + ((int)player.getGlobalBounds().width / 2)) / 128) + ((((int)player.getGlobalBounds().top + (int)player.getGlobalBounds().height) / 128) * 100);
+	rightTileId = (int)(((int)player.getGlobalBounds().left + (int)player.getGlobalBounds().width) / 128) + ((((int)player.getGlobalBounds().top + ((int)player.getGlobalBounds().height / 2)) / 128) * 100);
+
+	//std::cout << "x: " << (int)player.getGlobalBounds().left << "\ny: " << (int)player.getGlobalBounds().top << "\nlefttileid: " << ((((int)player.getGlobalBounds().top + (int)player.getGlobalBounds().height) / 32) * 100) << "\ntileType: " << world.GetTile(leftTileId).GetTypeString();
+	//std::cout << "\nx: "<<player.getGlobalBounds().left <<"\ny: " << player.getGlobalBounds().top;
 	//basic WASD movement
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
-		if (moveUp == true)
+		if (world.GetTile(topTileId).GetType() == Lava)//(world.GetTile(lastTopLeftId + 100).GetType() != Lava || world.GetTile(lastTopRightId + 100).GetType() != Lava) && (world.GetTile(topLeftId).GetType() == Lava || world.GetTile(topRightId).GetType() == Lava))
 		{
-			player.setPosition(GetPosition().x, GetPosition().y - movementSpeed); //can also use player.move('x', 'y');
+		}
+		else
+		{
+			player.move(0, -movementSpeed);
 		}
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
-		if (moveLeft == true)
+		if (world.GetTile(leftTileId).GetType() == Lava)
 		{
-			player.setPosition(GetPosition().x - movementSpeed, GetPosition().y); //can also use player.move('x', 'y');
+		}
+		else
+		{
+			player.move(-movementSpeed, 0);
 		}
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
-		if(moveDown == true)
+		if (world.GetTile(botTileId).GetType() == Lava)
 		{
-			player.setPosition(GetPosition().x, GetPosition().y + movementSpeed); //can also use player.move('x', 'y');
+		}
+		else
+		{
+			player.move(0, movementSpeed);
 		}
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
-		if (moveRight == true)
+		if (world.GetTile(rightTileId).GetType() == Lava)
 		{
-			player.setPosition(GetPosition().x + movementSpeed, GetPosition().y); //can also use player.move('x', 'y');
+		}
+		else
+		{
+			player.move(movementSpeed, 0);
 		}
 	}
-
-	/*playerOldRect = playerCurrentRect;
-	playerCurrentRect = player.getGlobalBounds();*/
-
-	myOldBox.Copy(myCurrentBox);
-	myCurrentBox.Copy(player.getGlobalBounds());
 
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
@@ -161,104 +162,7 @@ sf::FloatRect Player::GetRectWithPosition()
 	return sf::FloatRect(player.getPosition().x - ((player.getTextureRect().width * playerScale.x) / 2), player.getPosition().y - ((player.getTextureRect().height * playerScale.y) / 2), (player.getPosition().x - ((player.getTextureRect().width * playerScale.x) / 2)) + player.getTextureRect().width * playerScale.x, (player.getPosition().y - ((player.getTextureRect().height * playerScale.y) / 2)) + player.getTextureRect().height * playerScale.y);
 }
 
-
-const bool & Player::GetLeftCollision(BoundingBox & aColisionBox)
-{
-	return myOldBox.GetRight() < aColisionBox.GetLeft() && myCurrentBox.GetRight() >= aColisionBox.GetLeft();
-}
-
-const bool & Player::GetRightCollision(BoundingBox & aColisionBox)
-{
-	return myOldBox.GetLeft() >= aColisionBox.GetRight() && myCurrentBox.GetLeft() < aColisionBox.GetRight();
-}
-
-const bool & Player::GetUpCollision(BoundingBox & aColisionBox)
-{
-	return myOldBox.GetBottom() < aColisionBox.GetTop() && myCurrentBox.GetBottom() >= aColisionBox.GetTop();
-}
-
-const bool & Player::GetDownCollision(BoundingBox & aColisionBox)
-{
-	return myOldBox.GetTop() >= aColisionBox.GetBottom() && myCurrentBox.GetTop() < aColisionBox.GetBottom();
-}
-
-const sf::FloatRect & Player::GetLastTileCollidedLeft()
-{
-	return myLastTileColliderLeft;
-}
-const sf::FloatRect & Player::GetLastTileCollidedRight()
-{
-	return myLastTileColliderRight;
-}
-const sf::FloatRect & Player::GetLastTileCollidedUp()
-{
-	return myLastTileColliderUp;
-}
-const sf::FloatRect & Player::GetLastTileCollidedDown()
-{
-	return myLastTileColliderDown;
-}
-
-const void Player::SetTileCollidedLeft(const sf::FloatRect & aCollider)
-{
-	myLastTileColliderLeft = aCollider;
-}
-const void Player::SetTileCollidedRight(const sf::FloatRect & aCollider)
-{
-	myLastTileColliderRight = aCollider;
-}
-const void Player::SetTileCollidedUp(const sf::FloatRect & aCollider)
-{
-	myLastTileColliderUp = aCollider;
-}
-const void Player::SetTileCollidedDown(const sf::FloatRect & aCollider)
-{
-	myLastTileColliderDown = aCollider;
-}
-
-
-const bool & Player::GetLeftCollision(sf::FloatRect aRectWithPosition)
-{
-	if (playerOldRect.width < aRectWithPosition.left && playerCurrentRect.width >= aRectWithPosition.left)
-	{
-		std::cout << "\nplayer old rect .x + storlek:" << playerOldRect.width;
-		std::cout << "\ntile.left: " << aRectWithPosition.left;
-		return true;
-	}
-	return false;
-}
-
-const bool & Player::GetRightCollision(sf::FloatRect aRectWithPosition)
-{
-	if (playerOldRect.left >= aRectWithPosition.width && playerCurrentRect.left < aRectWithPosition.width)
-	{
-		return true;
-	}
-	return false;
-}
-
-const bool & Player::GetUpCollision(sf::FloatRect aRectWithPosition)
-{
-	if (playerOldRect.height < aRectWithPosition.top && playerCurrentRect.height >= aRectWithPosition.top)
-	{
-		return true;
-	}
-	return false;
-}
-
-const bool & Player::GetDownCollision(sf::FloatRect aRectWithPosition)
-{
-	if (playerOldRect.top >= aRectWithPosition.height && playerCurrentRect.top < aRectWithPosition.height)
-	{
-		return true;
-	}
-	return false;
-}
-
-
-
-
-void Player::LookAtMouse(sf::RenderWindow &window) 
+void Player::LookAtMouse(sf::RenderWindow &window)
 {
 	//hämta width och height från config fil. vi behöver windows storlek för att göra rotate to mouse eftersom player är i mitten och vi behöver windows mitt för att vara en bas man roterar runt om
 	std::ifstream config("Resources/config.cfg");
@@ -277,14 +181,14 @@ void Player::LookAtMouse(sf::RenderWindow &window)
 			windowHeight = number;
 		}
 	}
-	
+
 	sf::Vector2i mousepos = InputManager::getMousePosition(window); // now we have both the sprite position and the cursor position lets do the calculation so our sprite will
 	// face the position of the mouse
 	const float PI = 3.14159265;
 
 	//make cursor pos start 0,0 in middle of screen
-	mousepos.x = mousepos.x - windowWidth/2;
-	mousepos.y = mousepos.y - windowHeight/2;
+	mousepos.x = mousepos.x - windowWidth / 2;
+	mousepos.y = mousepos.y - windowHeight / 2;
 
 
 	//atan = arctan https://www.mathopenref.com/arctan.html <kollar matte

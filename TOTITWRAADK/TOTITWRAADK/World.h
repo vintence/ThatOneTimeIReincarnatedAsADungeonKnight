@@ -5,28 +5,18 @@
 #include "Tile.h"
 #include <vector>
 
-class Player;
 
 class World
 {
 public:
-	//World();
-	World(Player &aPlayer);
+	World();
 	~World();
 	void Update(sf::RenderWindow &window);
 	void Draw(sf::RenderWindow &window);
-	//sf::IntRect GetRect(sf::Sprite aSprite);
-	//sf::IntRect GetRectWithPosition(sf::Sprite aSprite);
 
-	//void SetPlayer(Player &aPlayer);
+	Tile GetTile(int tileId);
 
 private:
-	Player &player;
-	//sf::Sprite weapon;
-	//sf::Sprite consumer;
-	//sf::Sprite house;
-	//sf::Sprite road;
-	//sf::Sprite entertain;
 	sf::Sprite dirt;
 	sf::Sprite grass;
 	sf::Sprite lava;

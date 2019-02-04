@@ -13,25 +13,28 @@ Tile::Tile(const sf::Sprite &sprite, const sf::Vector2f &position, const TileTyp
 	mySprite.setPosition(position);
 	myPosition = position;
 	myType = type;
-	tileBoundingBox.Copy(mySprite.getGlobalBounds());	//myPosition.x, myPosition.y, myPosition.x + mySprite.getTextureRect().width * mySprite.getScale().x, myPosition.y + mySprite.getTextureRect().height * mySprite.getScale().y);
 	myRect = mySprite.getGlobalBounds();
 
 	switch (type)
 	{
 	case Grass:
 	{
+		typeString = "Grass";
 		break;
 	}
 	case Water:
 	{
+		typeString = "Water";
 		break;
 	}
 	case Dirt:
 	{
+		typeString = "Dirt";
 		break;
 	}
 	case Lava:
 	{
+		typeString = "Lava";
 		break;
 	}
 	}
@@ -109,6 +112,11 @@ const TileType & Tile::GetType()
 	return myType;
 }
 
+const std::string Tile::GetTypeString()
+{
+	return typeString;
+}
+
 sf::FloatRect Tile::GetRect()
 {
 	return myRect; //sf::IntRect(myPosition.x, myPosition.y, mySprite.getTextureRect().width, mySprite.getTextureRect().height);
@@ -116,9 +124,4 @@ sf::FloatRect Tile::GetRect()
 sf::FloatRect Tile::GetRectWithPosition()
 {
 	return sf::FloatRect(myPosition.x, myPosition.y, myPosition.x + (mySprite.getTextureRect().width * mySprite.getScale().x), myPosition.y + (mySprite.getTextureRect().height * mySprite.getScale().y));
-}
-
-BoundingBox & Tile::GetBoungingBox()
-{
-	return tileBoundingBox;
 }

@@ -23,17 +23,17 @@ public:
 	const sf::Sprite &GetSprite();
 	const sf::Vector2f &GetPosition();
 	const TileType &GetType();
+	const std::string GetTypeString();
 	sf::FloatRect GetRect();
 	sf::FloatRect GetRectWithPosition();
-	BoundingBox &GetBoungingBox();
 
 
 private:
 	sf::Sprite mySprite;
 	sf::Vector2f myPosition;
 	TileType myType;
+	std::string typeString;
 	sf::FloatRect myRect;
-	BoundingBox tileBoundingBox;
 };
 
 #endif
