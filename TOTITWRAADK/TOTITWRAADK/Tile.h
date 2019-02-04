@@ -1,6 +1,7 @@
 #ifndef TILE_HEADER
 #define TILE_HEADER
 #include <SFML/Graphics.hpp>
+#include "BoundingBox.h"
 
 
 enum TileType
@@ -22,11 +23,17 @@ public:
 	const sf::Sprite &GetSprite();
 	const sf::Vector2f &GetPosition();
 	const TileType &GetType();
+	const std::string GetTypeString();
+	sf::FloatRect GetRect();
+	sf::FloatRect GetRectWithPosition();
+
 
 private:
 	sf::Sprite mySprite;
 	sf::Vector2f myPosition;
 	TileType myType;
+	std::string typeString;
+	sf::FloatRect myRect;
 };
 
 #endif
