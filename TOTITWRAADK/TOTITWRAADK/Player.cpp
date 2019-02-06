@@ -12,14 +12,15 @@
 Player::Player(World &aWorld)
 	:world(aWorld)
 {
-	player = ResourceManager::MakeSprite("player", frame, 0, 32, 32);
+	player = ResourceManager::MakeSprite("player", frame, 0, 16, 32);
 	playerScale = sf::Vector2f(2.0f, 2.0f);
 	player.setOrigin(player.getTextureRect().width / 2, player.getTextureRect().height / 2); //set var mitten är för rotation
 	player.setScale(playerScale); //to flip put - infront scalenumber  player.setScale(-4.0f, 4.0f);
-	player.setPosition(100, 100);
+	player.setPosition(2000, 2000);
 
-	attack = ResourceManager::MakeSprite("bullet", 0, 0, 10, 10);
-	attack.setOrigin(attack.getTextureRect().width / 2, attack.getTextureRect().height / 2);
+	attack = ResourceManager::MakeSprite("attack", 0, 0, 24, 32);
+	attack.setScale(3.0f, 3.0f);
+	attack.setOrigin(0, attack.getTextureRect().height / 2);
 
 	std::ifstream config("Resources/config.cfg");
 	float number;
@@ -45,7 +46,7 @@ Player::~Player()
 
 void Player::Draw(sf::RenderWindow & window)
 {
-	window.draw(collidebox);
+	//window.draw(collidebox);
 	window.draw(player);
 	window.draw(attack);
 }
@@ -56,72 +57,83 @@ void Player::Update(sf::RenderWindow & window, const float &someDeltaTime)
 	collidebox.setPosition(player.getPosition());
 	collidebox.setOrigin(collidebox.getGlobalBounds().width / 2, collidebox.getGlobalBounds().height / 2);
 
-	//movementspeed scaling
-	movementSpeed = (baseSpeed + (agility / 5)) * someDeltaTime;
+	attack.setPosition(player.getPosition().x, player.getPosition().y + player.getGlobalBounds().height/4);
 
-	//LookAtMouse(window);
+	//movementspeed scaling
+	movementSpeed = (baseSpeed + (agility/2)) * someDeltaTime;
+
+	LookAtMouse(window);
 
 	//draw
 	Draw(window);
 
-	topLeftTileId = ((int)player.getGlobalBounds().left / 32) + (((int)player.getGlobalBounds().top / 32) * 100);
-	topRightTileId = (((int)player.getGlobalBounds().left + player.getGlobalBounds().width) / 32) + (((int)player.getGlobalBounds().top / 32) * 100);
-	botLeftTileId = ((int)player.getGlobalBounds().left / 32) + ((((int)player.getGlobalBounds().top + player.getGlobalBounds().height) / 32) * 100);
-	botRightTileId = (((int)player.getGlobalBounds().left + player.getGlobalBounds().width) / 32) + ((((int)player.getGlobalBounds().top + player.getGlobalBounds().height) / 32) * 100);
-
-	topTileId = (int)(((int)player.getGlobalBounds().left + ((int)player.getGlobalBounds().width / 2)) / 128) + (((int)player.getGlobalBounds().top / 128) * 100);
-	leftTileId = (int)((int)player.getGlobalBounds().left / 128) + ((((int)player.getGlobalBounds().top + ((int)player.getGlobalBounds().height / 2)) / 128) * 100);
-	botTileId = (int)(((int)player.getGlobalBounds().left + ((int)player.getGlobalBounds().width / 2)) / 128) + ((((int)player.getGlobalBounds().top + (int)player.getGlobalBounds().height) / 128) * 100);
-	rightTileId = (int)(((int)player.getGlobalBounds().left + (int)player.getGlobalBounds().width) / 128) + ((((int)player.getGlobalBounds().top + ((int)player.getGlobalBounds().height / 2)) / 128) * 100);
+	//collider checks
+	//full body below
+	//topTileId = (int)(((int)player.getGlobalBounds().left + ((int)player.getGlobalBounds().width / 2)) / 128) + (((int)player.getGlobalBounds().top / 128) * 100);
+	//leftTileId = (int)((int)player.getGlobalBounds().left / 128) + ((((int)player.getGlobalBounds().top + ((int)player.getGlobalBounds().height / 2)) / 128) * 100);
+	//botTileId = (int)(((int)player.getGlobalBounds().left + ((int)player.getGlobalBounds().width / 2)) / 128) + ((((int)player.getGlobalBounds().top + (int)player.getGlobalBounds().height) / 128) * 100);
+	//rightTileId = (int)(((int)player.getGlobalBounds().left + (int)player.getGlobalBounds().width) / 128) + ((((int)player.getGlobalBounds().top + ((int)player.getGlobalBounds().height / 2)) / 128) * 100);
+	//half body, bot part
+	int tileSize = 160;
+	int xRangeToDetect = 16;
+	int yRangeToDetect = 16;
+	topTileId = (int)(((int)player.getGlobalBounds().left + ((int)player.getGlobalBounds().width / 2)) / tileSize) + ((((int)player.getGlobalBounds().top - yRangeToDetect + ((int)player.getGlobalBounds().height / 2)) / tileSize)* 100);
+	leftTileId = (int)(((int)player.getGlobalBounds().left - xRangeToDetect)/ tileSize) + ((((int)player.getGlobalBounds().top + (((int)player.getGlobalBounds().height / 2) + ((int)player.getGlobalBounds().height/4))) / tileSize) * 100);
+	botTileId = (int)(((int)player.getGlobalBounds().left + ((int)player.getGlobalBounds().width / 2)) / tileSize) + ((((int)player.getGlobalBounds().top + yRangeToDetect + (int)player.getGlobalBounds().height) / tileSize) * 100);
+	rightTileId = (int)(((int)player.getGlobalBounds().left  + xRangeToDetect + (int)player.getGlobalBounds().width) / tileSize) + ((((int)player.getGlobalBounds().top + (((int)player.getGlobalBounds().height / 2) + ((int)player.getGlobalBounds().height / 4))) / tileSize) * 100);
 
 	//std::cout << "x: " << (int)player.getGlobalBounds().left << "\ny: " << (int)player.getGlobalBounds().top << "\nlefttileid: " << ((((int)player.getGlobalBounds().top + (int)player.getGlobalBounds().height) / 32) * 100) << "\ntileType: " << world.GetTile(leftTileId).GetTypeString();
 	//std::cout << "\nx: "<<player.getGlobalBounds().left <<"\ny: " << player.getGlobalBounds().top;
+
 	//basic WASD movement
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
-		if (world.GetTile(topTileId).GetType() == Lava)//(world.GetTile(lastTopLeftId + 100).GetType() != Lava || world.GetTile(lastTopRightId + 100).GetType() != Lava) && (world.GetTile(topLeftId).GetType() == Lava || world.GetTile(topRightId).GetType() == Lava))
+		if (world.GetTile(topTileId).GetType() != Lava && (player.getGlobalBounds().left > world.GetTile(topTileId).GetSprite().getGlobalBounds().width || player.getGlobalBounds().width < world.GetTile(topTileId).GetSprite().getGlobalBounds().left))//(world.GetTile(lastTopLeftId + 100).GetType() != Lava || world.GetTile(lastTopRightId + 100).GetType() != Lava) && (world.GetTile(topLeftId).GetType() == Lava || world.GetTile(topRightId).GetType() == Lava))
 		{
+			player.move(0, -movementSpeed);
 		}
 		else
 		{
-			player.move(0, -movementSpeed);
 		}
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
-		if (world.GetTile(leftTileId).GetType() == Lava)
+		if (world.GetTile(leftTileId).GetType() != Lava && (player.getGlobalBounds().top > world.GetTile(topTileId).GetSprite().getGlobalBounds().height || player.getGlobalBounds().height < world.GetTile(topTileId).GetSprite().getGlobalBounds().top))
 		{
+			player.move(-movementSpeed, 0);
 		}
 		else
 		{
-			player.move(-movementSpeed, 0);
+			player.move(1, 0);
 		}
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
-		if (world.GetTile(botTileId).GetType() == Lava)
+		if (world.GetTile(botTileId).GetType() != Lava && (player.getGlobalBounds().left > world.GetTile(topTileId).GetSprite().getGlobalBounds().width || player.getGlobalBounds().width < world.GetTile(topTileId).GetSprite().getGlobalBounds().left))
 		{
+			player.move(0, movementSpeed);
 		}
 		else
 		{
-			player.move(0, movementSpeed);
+			player.move(0, -1);
 		}
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
-		if (world.GetTile(rightTileId).GetType() == Lava)
+		if (world.GetTile(rightTileId).GetType() != Lava && (player.getGlobalBounds().top > world.GetTile(topTileId).GetSprite().getGlobalBounds().height || player.getGlobalBounds().height < world.GetTile(topTileId).GetSprite().getGlobalBounds().top))
 		{
+			player.move(movementSpeed, 0);
 		}
 		else
 		{
-			player.move(movementSpeed, 0);
+			player.move(-1, 0);
 		}
 	}
 
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
 	{
-		agility--;
+		agility -= 1000 * someDeltaTime;
 		std::cout << "agility: " << agility << std::endl;
 		std::cout << "speed: " << movementSpeed << std::endl;
 		std::cout << strenght << std::endl;
@@ -129,17 +141,13 @@ void Player::Update(sf::RenderWindow & window, const float &someDeltaTime)
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
 	{
-		agility += 1;
+		agility += 1000 * someDeltaTime;
 		std::cout << "agility: " << agility << std::endl;
 		std::cout << "speed: " << movementSpeed << std::endl;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 	{
 		window.close();
-	}
-	if (agility < 10)
-	{
-		agility = 10;
 	}
 }
 
@@ -194,11 +202,12 @@ void Player::LookAtMouse(sf::RenderWindow &window)
 	//atan = arctan https://www.mathopenref.com/arctan.html <kollar matte
 	float radian = atan2(mousepos.y, mousepos.x);
 	float rotation = radian * (180 / PI);
-	rotation = rotation + 90;
+	rotation = rotation;
 
 	//std::cout << "mouseposX:" << mousepos.x << " mouseposY:" << mousepos.y << "playerposX:" << player.getPosition().x << "playerposY:" << player.getPosition().y << std::endl;
 	//std::cout << "rotation:" << rotation << std::endl;
 
-	player.setRotation(rotation);
-	collidebox.setRotation(rotation);
+	//player.setRotation(rotation);
+	//collidebox.setRotation(rotation);
+	attack.setRotation(rotation);
 }

@@ -39,10 +39,10 @@ private:
 	int rightTileId;
 
 	float movementSpeed;
-	float baseSpeed = 400.f;
+	float baseSpeed = 500;
 	float intelligent = 1;
 	float strenght = 10;
-	float agility = 30;
+	float agility = 10;
 
 	sf::RectangleShape collidebox;
 

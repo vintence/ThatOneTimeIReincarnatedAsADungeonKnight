@@ -10,7 +10,8 @@ std::map<std::string, sf::Font> ResourceManager::_fonts;
 void ResourceManager::Init()
 {
 	//load in stuff
-	LoadTexture("player", "Resources/player.png");
+	LoadTexture("player", "Resources/player1.png");
+	LoadTexture("attack", "Resources/attack.png");
 	LoadTexture("resourceSheet", "Resources/sprites.png");
 	LoadTexture("bullet", "Resources/bullet.png");
 
