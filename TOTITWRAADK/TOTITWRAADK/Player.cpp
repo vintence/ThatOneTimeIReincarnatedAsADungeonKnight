@@ -60,7 +60,7 @@ void Player::Update(sf::RenderWindow & window, const float &someDeltaTime)
 	attack.setPosition(player.getPosition().x, player.getPosition().y + player.getGlobalBounds().height/4);
 
 	//movementspeed scaling
-	movementSpeed = (baseSpeed + (agility/2)) * someDeltaTime;
+	movementSpeed = (baseSpeed + (agility/2));
 
 	LookAtMouse(window);
 
@@ -90,43 +90,44 @@ void Player::Update(sf::RenderWindow & window, const float &someDeltaTime)
 	{
 		if (world.GetTile(topTileId).GetType() != Lava && (player.getGlobalBounds().left > world.GetTile(topTileId).GetSprite().getGlobalBounds().width || player.getGlobalBounds().width < world.GetTile(topTileId).GetSprite().getGlobalBounds().left))//(world.GetTile(lastTopLeftId + 100).GetType() != Lava || world.GetTile(lastTopRightId + 100).GetType() != Lava) && (world.GetTile(topLeftId).GetType() == Lava || world.GetTile(topRightId).GetType() == Lava))
 		{
-			player.move(0, -movementSpeed);
+			player.move(0, -movementSpeed * someDeltaTime);
 		}
 		else
 		{
+			player.move(0, 1 * someDeltaTime);
 		}
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
 		if (world.GetTile(leftTileId).GetType() != Lava && (player.getGlobalBounds().top > world.GetTile(topTileId).GetSprite().getGlobalBounds().height || player.getGlobalBounds().height < world.GetTile(topTileId).GetSprite().getGlobalBounds().top))
 		{
-			player.move(-movementSpeed, 0);
+			player.move(-movementSpeed * someDeltaTime, 0);
 		}
 		else
 		{
-			player.move(1, 0);
+			player.move(1 * someDeltaTime, 0);
 		}
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
 		if (world.GetTile(botTileId).GetType() != Lava && (player.getGlobalBounds().left > world.GetTile(topTileId).GetSprite().getGlobalBounds().width || player.getGlobalBounds().width < world.GetTile(topTileId).GetSprite().getGlobalBounds().left))
 		{
-			player.move(0, movementSpeed);
+			player.move(0, movementSpeed * someDeltaTime);
 		}
 		else
 		{
-			player.move(0, -1);
+			player.move(0, -1 * someDeltaTime);
 		}
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
 		if (world.GetTile(rightTileId).GetType() != Lava && (player.getGlobalBounds().top > world.GetTile(topTileId).GetSprite().getGlobalBounds().height || player.getGlobalBounds().height < world.GetTile(topTileId).GetSprite().getGlobalBounds().top))
 		{
-			player.move(movementSpeed, 0);
+			player.move(movementSpeed * someDeltaTime, 0);
 		}
 		else
 		{
-			player.move(-1, 0);
+			player.move(-1 * someDeltaTime, 0);
 		}
 	}
 
