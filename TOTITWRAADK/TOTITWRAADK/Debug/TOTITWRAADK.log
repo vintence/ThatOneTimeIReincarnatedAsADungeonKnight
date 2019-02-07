@@ -1,10 +1,12 @@
-﻿  Player.cpp
-c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\player.cpp(15): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\player.cpp(119): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\player.cpp(123): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\player.cpp(132): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\player.cpp(139): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+﻿  Enemy.cpp
+c:\users\jakob.johnsson\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\enemy.cpp(14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\jakob.johnsson\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\enemy.cpp(57): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\jakob.johnsson\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\enemy.cpp(68): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\jakob.johnsson\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\enemy.cpp(76): warning C4018: '<': signed/unsigned mismatch
+  EnemyManager.cpp
+c:\users\jakob.johnsson\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\enemymanager.cpp(67): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\jakob.johnsson\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\enemymanager.cpp(75): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   TOTITWRAADK.cpp
-c:\users\trungkin.le\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\totitwraadk.cpp(45): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+c:\users\jakob.johnsson\documents\visual studio 2017\projects\thatonetimeireincarnatedasadungeonknight\totitwraadk\totitwraadk\totitwraadk.cpp(52): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
   Generating Code...
-  TOTITWRAADK.vcxproj -> C:\Users\trungkin.le\Documents\Visual Studio 2017\Projects\ThatOneTimeIReincarnatedAsADungeonKnight\TOTITWRAADK\Debug\TOTITWRAADK.exe
+  TOTITWRAADK.vcxproj -> C:\Users\jakob.johnsson\Documents\Visual Studio 2017\Projects\ThatOneTimeIReincarnatedAsADungeonKnight\TOTITWRAADK\Debug\TOTITWRAADK.exe

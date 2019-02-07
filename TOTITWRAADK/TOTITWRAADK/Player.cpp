@@ -14,7 +14,7 @@ Player::Player()
 	playerScale = sf::Vector2f(4.0f, 4.0f);
 	player.setOrigin(player.getTextureRect().width / 2, player.getTextureRect().height / 2);
 	player.setScale(playerScale); //to flip put - infront scalenumber  player.setScale(-4.0f, 4.0f);
-	player.setPosition(0, 0);
+	player.setPosition(0, 0);	
 
 	std::ifstream config("Resources/config.cfg");
 	float number;

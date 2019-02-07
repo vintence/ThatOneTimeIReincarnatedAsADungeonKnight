@@ -34,58 +34,6 @@ Tile::Tile(const sf::Sprite &sprite, const sf::Vector2f &position, const TileTyp
 	}
 	}
 
-	//switch (type)
-	//{
-	//case Weapon:
-	//{
-	//	generateWeapon = 10;
-	//	generateMoney = 0;
-	//	populationCost = 10;
-	//	generatePopulation = 0;
-	//	moneyCost = 100;
-	//	break;
-	//}
-	//case House:
-	//{
-	//	generateWeapon = 0;
-	//	generateMoney = 0;
-	//	populationCost = 0;
-	//	generatePopulation = 5;
-	//	moneyCost = 50;
-	//	generateHappiness = 0;
-	//	break;
-	//}
-	//case Consumer:
-	//{
-	//	generateWeapon = 0;
-	//	generateMoney = 50;
-	//	populationCost = 5;
-	//	generatePopulation = 0;
-	//	moneyCost = 150;
-	//	generateHappiness = 0;
-	//	break;
-	//}
-	//case Entertain:
-	//{
-	//	generateWeapon = 0;
-	//	generateMoney = 25;
-	//	populationCost = 5;
-	//	generatePopulation = 0;
-	//	moneyCost = 100;
-	//	generateHappiness = 0.5;
-	//	break;
-	//}
-	//case Road:
-	//{
-	//	generateWeapon = 0;
-	//	generateMoney = 0;
-	//	populationCost = 0;
-	//	generatePopulation = 0;
-	//	moneyCost = 10;
-	//	generateHappiness = 0;
-	//	break;
-	//}
-	//}
 }
 Tile::~Tile()
 {
