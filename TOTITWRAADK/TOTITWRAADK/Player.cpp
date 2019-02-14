@@ -75,8 +75,8 @@ void Player::Update(sf::RenderWindow & window, const float &someDeltaTime)
 	//rightTileId = (int)(((int)player.getGlobalBounds().left + (int)player.getGlobalBounds().width) / 128) + ((((int)player.getGlobalBounds().top + ((int)player.getGlobalBounds().height / 2)) / 128) * 100);
 	//half body, bot part
 	int tileSize = 160;
-	int xRangeToDetect = 16;
-	int yRangeToDetect = 16;
+	int xRangeToDetect = 0; 
+	int yRangeToDetect = 0;
 	topTileId = (int)(((int)player.getGlobalBounds().left + ((int)player.getGlobalBounds().width / 2)) / tileSize) + ((((int)player.getGlobalBounds().top - yRangeToDetect + ((int)player.getGlobalBounds().height / 2)) / tileSize)* 100);
 	leftTileId = (int)(((int)player.getGlobalBounds().left - xRangeToDetect)/ tileSize) + ((((int)player.getGlobalBounds().top + (((int)player.getGlobalBounds().height / 2) + ((int)player.getGlobalBounds().height/4))) / tileSize) * 100);
 	botTileId = (int)(((int)player.getGlobalBounds().left + ((int)player.getGlobalBounds().width / 2)) / tileSize) + ((((int)player.getGlobalBounds().top + yRangeToDetect + (int)player.getGlobalBounds().height) / tileSize) * 100);
