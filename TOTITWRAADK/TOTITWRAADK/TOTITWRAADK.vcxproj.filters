@@ -51,6 +51,9 @@
     <ClInclude Include="BoundingBox.h">
       <Filter>World</Filter>
     </ClInclude>
+    <ClInclude Include="EnemyManager.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -82,6 +85,9 @@
     </ClCompile>
     <ClCompile Include="BoundingBox.cpp">
       <Filter>World</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyManager.cpp">
+      <Filter>Entities</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
