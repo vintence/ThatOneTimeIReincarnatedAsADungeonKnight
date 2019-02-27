@@ -18,9 +18,13 @@ Player::Player(World &aWorld)
 	player.setScale(playerScale); //to flip put - infront scalenumber  player.setScale(-4.0f, 4.0f);
 	player.setPosition(2000, 2000);
 
-	attack = ResourceManager::MakeSprite("attack", 0, 0, 24, 32);
+	attack = ResourceManager::MakeSprite("attack", 0, 0, 24, 2);
 	attack.setScale(3.0f, 3.0f);
 	attack.setOrigin(0, attack.getTextureRect().height / 2);
+
+	enemyTest = ResourceManager::MakeSprite("bullet", 0, 0, 10, 10);
+	enemyTest.setScale(4.0f, 4.0f);
+	enemyTest.setPosition(3000, 3000);
 
 	std::ifstream config("Resources/config.cfg");
 	float number;
@@ -46,16 +50,20 @@ Player::~Player()
 
 void Player::Draw(sf::RenderWindow & window)
 {
-	//window.draw(collidebox);
-	window.draw(player);
+	window.draw(collidebox);
 	window.draw(attack);
+	window.draw(player);
+	if (enemyAlive == true)
+	{
+		window.draw(enemyTest);
+	}
 }
 
 void Player::Update(sf::RenderWindow & window, const float &someDeltaTime)
 {
-	collidebox = sf::RectangleShape(sf::Vector2f(player.getTextureRect().width * player.getScale().x, player.getTextureRect().height * player.getScale().y));
-	collidebox.setPosition(player.getPosition());
-	collidebox.setOrigin(collidebox.getGlobalBounds().width / 2, collidebox.getGlobalBounds().height / 2);
+	collidebox = sf::RectangleShape(sf::Vector2f(attack.getTextureRect().width * attack.getScale().x, attack.getTextureRect().height * attack.getScale().y));
+	collidebox.setPosition(attack.getPosition());
+	collidebox.setOrigin(0, collidebox.getGlobalBounds().height / 2);
 
 	attack.setPosition(player.getPosition().x, player.getPosition().y + player.getGlobalBounds().height/4);
 
@@ -150,7 +158,15 @@ void Player::Update(sf::RenderWindow & window, const float &someDeltaTime)
 	{
 		window.close();
 	}
+	if (attack.getGlobalBounds().intersects(enemyTest.getGlobalBounds()))
+	{
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		{
+			enemyAlive = false;
+		}
+	}
 }
+
 
 sf::Vector2f Player::GetPosition() //mitten av player
 {
@@ -161,15 +177,18 @@ void Player::SetPosition(sf::Vector2f aPosition)
 	player.setPosition(aPosition);
 }
 
+
 sf::FloatRect Player::GetRect()
 { //läggas till saker efter getposition för att origin är i mitten av spriten.
 	return player.getGlobalBounds(); //sf::FloatRect(player.getPosition().x - ((player.getTextureRect().width * playerScale.x)/2), player.getPosition().y - ((player.getTextureRect().height * playerScale.y) / 2), player.getTextureRect().width * playerScale.x, player.getTextureRect().height * playerScale.y);
 }
 
+
 sf::FloatRect Player::GetRectWithPosition()
 {
 	return sf::FloatRect(player.getPosition().x - ((player.getTextureRect().width * playerScale.x) / 2), player.getPosition().y - ((player.getTextureRect().height * playerScale.y) / 2), (player.getPosition().x - ((player.getTextureRect().width * playerScale.x) / 2)) + player.getTextureRect().width * playerScale.x, (player.getPosition().y - ((player.getTextureRect().height * playerScale.y) / 2)) + player.getTextureRect().height * playerScale.y);
 }
+
 
 void Player::LookAtMouse(sf::RenderWindow &window)
 {
@@ -209,6 +228,6 @@ void Player::LookAtMouse(sf::RenderWindow &window)
 	//std::cout << "rotation:" << rotation << std::endl;
 
 	//player.setRotation(rotation);
-	//collidebox.setRotation(rotation);
+	collidebox.setRotation(rotation);
 	attack.setRotation(rotation);
 }

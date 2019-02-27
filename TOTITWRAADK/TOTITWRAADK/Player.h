@@ -29,6 +29,9 @@ private:
 	sf::Vector2f playerScale;
 	sf::Sprite attack;
 
+	bool enemyAlive = true;
+	sf::Sprite enemyTest;
+
 	int topLeftTileId;
 	int topRightTileId;
 	int botLeftTileId;
